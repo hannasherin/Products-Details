@@ -1,0 +1,13 @@
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(9, 113, 182);
+    color: white;
+    padding: 10px;
+}
+ul{
+    display: flex;
+    gap: 20px;
+    list-style-type: none;
+}

@@ -1,0 +1,32 @@
+{
+    "products":[
+        {
+            "id":1,
+            "name":"Hand Bag",
+            "description":"Channel  comfortable hand Bag",
+            "image":"/images/acc8.jpeg",
+            "price":5000
+        },
+        {
+             "id":2,
+            "name":"Titanic",
+            "description":"Titanic Luxury Watch",
+            "image":"/images/download.jpeg",
+            "price":15000
+        },
+        {
+              "id":3,
+            "name":"Heel Shoe",
+            "description":"Ladies Heel Shoes",
+            "image":"/images/high-heel-shoes.jpg",
+            "price":10000
+        },
+        {
+            "id":4,
+            "name":"Indepented",
+            "description":"gents watch",
+            "image":"/images/images.jpeg",
+            "price":"12000"
+        }
+    ]
+}

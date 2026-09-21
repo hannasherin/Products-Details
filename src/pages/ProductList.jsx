@@ -1,0 +1,42 @@
+import React, { useEffect } from 'react'
+import { getProductfromServer } from '../slice/productSlice'
+import { useDispatch, useSelector } from 'react-redux'
+
+const ProductList = () => {
+
+  const { products, isloading, error } = useSelector((state) => state.productInfo)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getProductfromServer())
+  }, [])
+    if (isloading) return <p>Loading...</p>;
+      if (error) return <p style={{ color: "red" }}>{error}</p>;
+
+  return (
+    <div>
+      <h1>Product List</h1>
+    {isloading && <h1 style={{fontWeight:'bold',fontSize:'20px',color:'yellow'}}>Loading...</h1>}
+      {error && <h1 style={{fontWeight:'bold',fontSize:'20px',color:'red'}}>Server Error</h1>}
+
+      <br />
+      {products.map((item) => (
+        <div key={item.id}>
+          <p>{item.id}</p>
+          <p>{item.name}</p>
+          <p>{item.description}</p>
+          <img src={item.image} alt="" width="150" />
+          <p>{item.price}</p>
+          <button>Delete</button> 
+          <button>Edit</button>
+          <hr />
+        </div>
+        
+      ))}
+      
+    </div>
+  )
+}
+
+export default ProductList
