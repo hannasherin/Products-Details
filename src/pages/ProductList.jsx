@@ -1,19 +1,23 @@
 import React, { useEffect } from 'react'
-import { getProductfromServer } from '../slice/productSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import {  deleteProducts, getProductfromServer } from '../slice/productSlice'
+import { useDispatch} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const ProductList = () => {
 
-  const { products, isloading, error } = useSelector((state) => state.productInfo)
-
+const {products , isloading , error}=useSelector((state)=> state.productInfo)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getProductfromServer())
   }, [])
-    if (isloading) return <p>Loading...</p>;
-      if (error) return <p style={{ color: "red" }}>{error}</p>;
 
+ const handleDelete=(id)=>{
+  dispatch(deleteProducts(id))
+ }
+
+
+    
   return (
     <div>
       <h1>Product List</h1>
@@ -28,7 +32,7 @@ const ProductList = () => {
           <p>{item.description}</p>
           <img src={item.image} alt="" width="150" />
           <p>{item.price}</p>
-          <button>Delete</button> 
+          <button onClick={()=>handleDelete(item.id)}>Delete</button> 
           <button>Edit</button>
           <hr />
         </div>

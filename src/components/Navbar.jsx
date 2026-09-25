@@ -2,8 +2,13 @@
 import React from 'react'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
+
+const {products , isloading , error}=useSelector((state)=> state.productInfo)
+
+
   return (
     <div>
       <nav>
@@ -15,7 +20,7 @@ const Navbar = () => {
             <li><Link to="/productlist" style={{textDecoration:'none',color:'white'}}>Products list</Link></li>
         </ul>
         <div>
-            <h3>Count:</h3>
+            <h3>Count: {products.length}</h3>
         </div>
       </nav>
     </div>
