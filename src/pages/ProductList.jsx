@@ -2,9 +2,12 @@ import React, { useEffect } from 'react'
 import {  deleteProducts, getProductfromServer } from '../slice/productSlice'
 import { useDispatch} from 'react-redux'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const ProductList = () => {
 
+
+const navigate=useNavigate()
 const {products , isloading , error}=useSelector((state)=> state.productInfo)
   const dispatch = useDispatch()
 
@@ -33,7 +36,7 @@ const {products , isloading , error}=useSelector((state)=> state.productInfo)
           <img src={item.image} alt="" width="150" />
           <p>{item.price}</p>
           <button onClick={()=>handleDelete(item.id)}>Delete</button> 
-          <button>Edit</button>
+          <button onClick={()=>navigate(`/edit-product/${item.id}`)}>Edit</button>
           <hr />
         </div>
         

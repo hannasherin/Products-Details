@@ -45,6 +45,18 @@ export const createProducts=createAsyncThunk(
     }
 )
 
+export const updateProducts=createAsyncThunk(
+    'products/updateProducts',
+    async(product,{rejectWithValue})=>{
+        try{
+            const response=await api.put(`/products/${product.id}`,product)
+            return response.data
+        } catch(error){
+            return rejectWithValue('No Products Found')
+        }
+    }
+)
+
 const productSlice=createSlice({
     name:'products',
     initialState,
@@ -95,7 +107,23 @@ const productSlice=createSlice({
         state.isloading=false
         state.error=action.payload.error
     })
-
+    
+    // update Product 
+    .addCase(updateProducts.pending,(state,action)=>{
+        state.isloading=true
+        state.error=''
+    })
+    .addCase(updateProducts.fulfilled,(state,action)=>{
+        state.isloading=false
+        const index=state.products.findIndex((item)=>item.id === action.payload.id)
+        if(index !== -1){
+            state.products[index]=action.payload
+        }
+    })
+    .addCase(updateProducts.rejected,(state,action)=>{
+        state.isloading=false
+        state.error=action.payload?.error || "No Product Update"
+    })
 
     }
 })
